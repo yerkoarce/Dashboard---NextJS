@@ -116,3 +116,7 @@ export async function GET() {
   }
 }
  */
+
+export function GET() {
+  return new Response('Not implemented yet')
+}
