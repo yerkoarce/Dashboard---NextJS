@@ -20,6 +20,7 @@ export default function LoginForm() {
     authenticate,
     undefined,
   );
+  console.log(isPending)
   return (
     <form className="space-y-3" action={formAction}>
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">

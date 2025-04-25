@@ -57,7 +57,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
       `
     } catch (error) {
       return {
-        message: 'Database Error: Failed to Create Invoice.'
+        message: `Database Error: Failed to Update Invoice. ${error}`
       }
   }
 
@@ -89,7 +89,7 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
       `;
     } catch (error) {
       return {
-        message: 'Database Error: Failed to Update Invoice.'
+        message: `Database Error: Failed to Update Invoice. ${error}`
       }
     }
     revalidatePath('/dashboard/invoices');
@@ -107,9 +107,9 @@ export async function deleteInvoice(id: string) {
 }
 
 export async function authenticate(
-  prevState: string | undefined,
+  prevState: "Invalid credentials." | "Something went wrong." | null | undefined,
   formData: FormData,
-) {
+): Promise<"Invalid credentials." | "Something went wrong." | null>  {
   const result = await signIn('credentials', {
     redirect: false,
     ...Object.fromEntries(formData),
