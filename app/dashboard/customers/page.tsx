@@ -1,11 +1,20 @@
+import CustomersTable from '@/app/ui/customers/table'
 import { Metadata } from 'next'
+import { fetchFilteredCustomers } from '@/app/lib/data'
 
 export const metadata: Metadata = {
-  title: 'Login',
+  title: 'Customers',
 };
 
-export default function Customers() {
+export default async function Page(props: {
+  searchParams?: Promise<{
+    query?: string;
+  }>;
+}) {
+  const searchParams = await props.searchParams
+  const query = searchParams?.query || ''
+  const customers = await fetchFilteredCustomers(query)
   return (
-    <h1>Customers page</h1>
+    <CustomersTable customers={customers} />
   )
 }
